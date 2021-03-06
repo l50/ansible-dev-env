@@ -1,0 +1,37 @@
+version: '3'
+services:
+  control:
+    build:
+      context: ./control
+      dockerfile: Dockerfile
+    container_name: control-node
+    volumes:
+       - ./control/files/ansible:/etc/ansible
+    hostname: controlnode.demo.com
+    networks:
+      ansible-net:
+        ipv4_address: 172.90.0.2
+    extra_hosts:
+      - 'managednode.demo.com:172.90.0.3'
+
+  managed:
+    build:
+      context: ./managed
+      dockerfile: Dockerfile
+    container_name: managed-node
+    hostname: managednode.demo.com
+    networks:
+      ansible-net:
+        ipv4_address: 172.90.0.3
+    extra_hosts:
+      - 'controlnode.demo.com:172.90.0.2'
+    depends_on:
+      - control
+
+networks:
+  ansible-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.90.0.0/24
