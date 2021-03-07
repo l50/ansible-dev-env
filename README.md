@@ -1,5 +1,6 @@
 # ansible-dev-env
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/l50/ansible_dev_env/blob/main/LICENSE)
+[![Build Status](https://dev.azure.com/jaysonegrace/ansible-dev-env/_apis/build/status/l50.ansible-dev-env?branchName=main)](https://dev.azure.com/jaysonegrace/ansible-dev-env/_build/latest?definitionId=39&branchName=main)
 
 Simple development lab for Ansible with a single managed node.
 

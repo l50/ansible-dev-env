@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+    - master
+
+schedules:
+- cron: "0 0 * * 0"
+  displayName: Weekly midnight (UTC) build
+  branches:
+    include:
+    - master
+  always: true
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: | 
+    git clone https://github.com/l50/ansible-dev-env.git
+    cd ansible-dev-env
+    bash scripts/create_ssh_keypair.sh
+    docker-compose up -d --build
+  displayName: 'Build and configure the ansible dev environment'
+
+- script: |
+    docker exec -i control-node bash -c "cd /etc/ansible && ansible all -m ping"
+    docker exec -i control-node bash -c "cd /etc/ansible && ansible-playbook site.yml"
+  displayName: 'Test connectivity and functionality between the control and managed node'
+
+- script: | 
+    docker-compose down -v
+  displayName: 'Tear down the ansible dev environment'
+  workingDirectory: ansible-dev-env
