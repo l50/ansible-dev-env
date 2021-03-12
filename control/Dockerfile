@@ -16,7 +16,7 @@ RUN chown -R ansible:ansible /home/ansible && \
     rm -rf /var/lib/apt/lists/*
 
 USER ansible
-WORKDIR /home/ansible
+WORKDIR /etc/ansible
 
 EXPOSE 22
 

@@ -10,7 +10,7 @@ You must download and install the following for this environment to work:
 * [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Building the environment
-To create an environment with an ansible control node that manages a single node, run the following command:
+To create an environment with an ansible control node that manages two nodes, run the following command:
 ```
 make build
 ```
@@ -22,10 +22,8 @@ make destroy
 
 ## Getting Started
 ```
-docker exec -it control_node bash
-cd /etc/ansible
-# Run the hello role on the managed node
-ansible-playbook -vvv site.yml
+# Run the hello role on the managed nodes
+docker exec -it control-node ansible-playbook site.yml -vvv
 ```
 
 ## Misc
