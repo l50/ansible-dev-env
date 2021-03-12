@@ -7,6 +7,7 @@ build:
 
 destroy:
 	docker-compose down -v
-	rm managed/files/ssh/authorized_keys
+	rm managed-ubuntu/files/ssh/authorized_keys
+	rm managed-centos/files/ssh/authorized_keys
 	rm control/files/ssh/ansible_dev_env
 	rm control/files/ssh/config

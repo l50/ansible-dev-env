@@ -12,17 +12,32 @@ services:
       ansible-net:
         ipv4_address: 172.90.0.2
     extra_hosts:
-      - 'managednode.demo.com:172.90.0.3'
+      - 'managedubuntu.demo.com:172.90.0.3'
+      - 'managedcentos.demo.com:172.90.0.4'
 
-  managed:
+  managed-ubuntu:
     build:
-      context: ./managed
+      context: ./managed-ubuntu
       dockerfile: Dockerfile
-    container_name: managed-node
-    hostname: managednode.demo.com
+    container_name: managed-ubuntu-node
+    hostname: managedubuntu.demo.com
     networks:
       ansible-net:
         ipv4_address: 172.90.0.3
+    extra_hosts:
+      - 'controlnode.demo.com:172.90.0.2'
+    depends_on:
+      - control
+
+  managed-centos:
+    build:
+      context: ./managed-centos
+      dockerfile: Dockerfile
+    container_name: managed-centos-node
+    hostname: managedcentos.demo.com
+    networks:
+      ansible-net:
+        ipv4_address: 172.90.0.4
     extra_hosts:
       - 'controlnode.demo.com:172.90.0.2'
     depends_on:

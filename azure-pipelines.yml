@@ -25,7 +25,7 @@ steps:
 - script: |
     docker exec -i control-node bash -c "cd /etc/ansible && ansible all -m ping"
     docker exec -i control-node bash -c "cd /etc/ansible && ansible-playbook site.yml"
-  displayName: 'Test connectivity and functionality between the control and managed node'
+  displayName: 'Test connectivity and functionality between the control and managed nodes'
 
 - script: | 
     docker-compose down -v

@@ -16,7 +16,8 @@ set -e
 
 CONTROL_NODE_FILES='control/files'
 KEY_NAME='ansible_dev_env'
-MANAGED_NODE_FILES='managed/files'
+MANAGED_UBUNTU_FILES='managed-ubuntu/files'
+MANAGED_CENTOS_FILES='managed-centos/files'
 # Color Output
 BLUE="\033[01;34m"
 GREEN="\033[01;32m" 
@@ -60,7 +61,8 @@ gen_keypair() {
 
 ssh_files() {
     echo -e "${YELLOW}Adding ${KEY_NAME}.pub to managed nodes authorized_keys.${RESET}"
-    mv "${KEY_NAME}.pub" "${MANAGED_NODE_FILES}/ssh/authorized_keys"
+    cp "${KEY_NAME}.pub" "${MANAGED_UBUNTU_FILES}/ssh/authorized_keys"
+    cp "${KEY_NAME}.pub" "${MANAGED_CENTOS_FILES}/ssh/authorized_keys"
 
     echo -e "${YELLOW}Moving ${KEY_NAME} private key to ${CONTROL_NODE_FILES}/ssh.${RESET}"
     mv "${KEY_NAME}" "${CONTROL_NODE_FILES}/ssh"

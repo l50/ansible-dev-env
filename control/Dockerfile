@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+LABEL Maintainer="Jayson Grace <https://techvomit.net>"
+
 RUN apt-get update && \
     apt-get install -y ansible curl iproute2 ssh vim wget && \
     # Create ansible user
