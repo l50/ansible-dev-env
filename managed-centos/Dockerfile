@@ -22,7 +22,7 @@ RUN chown -R ansible:ansible /home/ansible && \
     test -f /etc/ssh/ssh_host_rsa_key || /usr/bin/ssh-keygen -q -t rsa -f /etc/ssh/ssh_host_rsa_key -C '' -N '' && \
     test -f /etc/ssh/ssh_host_ed25519_key || /usr/bin/ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -C '' -N '' && \
     # Fix annoying error about the host still booting up
-    sudo rm -rf /run/nologin
+    rm -rf /run/nologin
 
 USER ansible
 WORKDIR /home/ansible
